@@ -103,4 +103,6 @@ def lexical_analyzer(program_code):
     for token in tokens:
         print(token)
 
+    return tokens
+
  
