@@ -11,7 +11,7 @@ TOKENS = [
     ("OUTPUT_KEYWORD", r"VISIBLE"),  # Output keyword
     ("INPUT_KEYWORD", r"GIMMEH"),  # Input
     ("DECLARATION_START", r"WAZZUP"),  # Variable declaration section start
-    ("DECLARATOPN_END", r"BUHBYE"),  # Variable declaration section end
+    ("DECLARATION_END", r"BUHBYE"),  # Variable declaration section end
     ("EXPR_SUM", r"SUM OF"),  # Sum operation
     ("EXPR_DIFF", r"DIFF OF"),  # Difference operation
     ("EXPR_PRODUKT", r"PRODUKT OF"),  # Product operation
@@ -69,6 +69,7 @@ token_regex = "|".join(f"(?P<{name}>{pattern})" for name, pattern in TOKENS)
 token_compiler = re.compile(token_regex)
 
 # Tokenizer function
+# Tokenizer function
 def tokenize(code):
     tokens = []
     multiline_comment = False
@@ -91,16 +92,14 @@ def tokenize(code):
         elif kind == "NEWLINE":
             continue  # Newlines just separate statements
         else:
-            tokens.append(f"{kind}: {value}")
+            tokens.append((kind, value))  # Add as a tuple
 
     return tokens
+
 
 def lexical_analyzer(program_code):
     tokens = []
     for line in program_code:
         tokens.extend(tokenize(line))
 
-    for token in tokens:
-        print(token)
-
- 
+    return tokens
