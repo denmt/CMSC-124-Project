@@ -1,10 +1,10 @@
 import tkinter as tk
 from tkinter import scrolledtext
-from tkinter import filedialog, messagebox
 import lexical_analyzer
-from syntax_analyzer import SyntaxAnalyzer  # Import your custom syntax analyzer
+from tkinter import filedialog, messagebox
 
 def loadfile():
+    
     # Open file dialog to select a file.
     filepath = filedialog.askopenfilename()
 
