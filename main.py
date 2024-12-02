@@ -1,10 +1,10 @@
 import tkinter as tk
 from tkinter import scrolledtext
-import lexical_analyzer
 from tkinter import filedialog, messagebox
+import lexical_analyzer
+from syntax_analyzer import SyntaxAnalyzer  # Import your custom syntax analyzer
 
 def loadfile():
-    
     # Open file dialog to select a file.
     filepath = filedialog.askopenfilename()
 
@@ -40,9 +40,7 @@ def execute():
     try:
         # Get the tokens from lexical analyzer
         tokens = tokenize(code)
-        
-        # Perform syntax analysis on the tokens
-
+    
         # Clear previous outputs
         token_output.delete(1.0, tk.END)
         syntax_output.delete(1.0, tk.END)
@@ -50,9 +48,11 @@ def execute():
         # Display the tokens and syntax analysis result
         token_output.insert(tk.END, "Tokens:\n")
         for token in tokens:
-            token_output.insert(tk.END, f"{token[0]}: {token[1]}\n")
+            token_output.insert(tk.END, f"{token}\n")
 
+        # Perform syntax analysis on the tokens
         analysis_result = analyze_syntax(tokens)
+
         syntax_output.insert(tk.END, "Syntax Analysis Result:\n")
         syntax_output.insert(tk.END, analysis_result)
         
